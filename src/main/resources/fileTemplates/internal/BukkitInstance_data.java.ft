@@ -1,0 +1,16 @@
+package ${PACKAGE};
+
+import ${CORE_INSTANCE_PACKAGE}.${CORE_INSTANCE_NAME};
+import ${BUKKIT_MAIN_PACKAGE}.BukkitMain;
+
+public final class ${BUKKIT_INSTANCE_NAME} extends ${CORE_INSTANCE_NAME} {
+
+  public ${BUKKIT_INSTANCE_NAME}() {
+    super();
+  }
+
+  @Override
+  protected ClassLoader getClassLoader() {
+    return BukkitMain.getInstance().getClassLoader0();
+  }
+}

@@ -1,0 +1,39 @@
+package ${PACKAGE};
+
+import ${API_PACKAGE}.instance.${API_INSTANCE_NAME};
+import ${SPRING_BASE_PACKAGE}.${CORE_SPRING_APPLICATION_NAME};
+import org.springframework.context.ConfigurableApplicationContext;
+import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
+
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
+public abstract class ${CORE_INSTANCE_NAME} implements ${API_INSTANCE_NAME} {
+
+  protected static final ComponentLogger LOGGER = ComponentLogger.logger("${API_INSTANCE_NAME}");
+
+  private ConfigurableApplicationContext context;
+
+  public ${CORE_INSTANCE_NAME}() {
+  }
+
+  @OverridingMethodsMustInvokeSuper
+  public void onLoad() {
+    this.context = ${CORE_SPRING_APPLICATION_NAME}.run(getClassLoader());
+  }
+
+  @OverridingMethodsMustInvokeSuper
+  public void onEnable() {
+  }
+
+  @OverridingMethodsMustInvokeSuper
+  public void onDisable() {
+    this.context.close();
+  }
+
+  @Override
+  public ConfigurableApplicationContext getApplicationContext() {
+    return this.context;
+  }
+
+  protected abstract ClassLoader getClassLoader();
+}

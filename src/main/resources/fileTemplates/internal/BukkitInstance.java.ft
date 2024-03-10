@@ -1,0 +1,10 @@
+package ${PACKAGE};
+
+import ${CORE_INSTANCE_PACKAGE}.${CORE_INSTANCE_NAME};
+
+public final class ${BUKKIT_INSTANCE_NAME} extends ${CORE_INSTANCE_NAME} {
+
+  public ${BUKKIT_INSTANCE_NAME}() {
+    super();
+  }
+}

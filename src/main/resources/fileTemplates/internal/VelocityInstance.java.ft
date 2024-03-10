@@ -1,0 +1,10 @@
+package ${PACKAGE};
+
+import ${CORE_INSTANCE_PACKAGE}.${CORE_INSTANCE_NAME};
+
+public final class ${VELOCITY_INSTANCE_NAME} extends ${CORE_INSTANCE_NAME} {
+
+  public ${VELOCITY_INSTANCE_NAME}() {
+    super();
+  }
+}

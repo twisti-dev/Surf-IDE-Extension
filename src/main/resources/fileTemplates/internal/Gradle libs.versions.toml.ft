@@ -1,0 +1,21 @@
+[versions]
+io-papermc-paper-api-version = "1.20.4-R0.1-SNAPSHOT"
+com-velocitypowered-velocity-api-version = "3.3.0-SNAPSHOT"
+#if(${WITH_DATA})
+dev-slne-data-api-version = "${DATA_VERSION}"
+#end
+#if(${WITH_API})
+dev-slne-api-version = "${API_VERSION}"
+#end
+
+[libraries]
+io-papermc-paper-api = { module = "io.papermc.paper:paper-api", version.ref = "io-papermc-paper-api-version" }
+com-velocitypowered-velocity-api = { module = "com.velocitypowered:velocity-api", version.ref = "com-velocitypowered-velocity-api-version" }
+#if(${WITH_DATA})
+dev-slne-data-api = { module = "dev.slne:surf-data-api", version.ref = "dev-slne-data-api-version" }
+#end
+#if(${WITH_API})
+dev-slne-surf-api-core-api = { module = "dev.slne.surf:surf-api-core-api", version.ref = "dev-slne-api-version" }
+dev-slne-surf-api-bukkit-api = { module = "dev.slne.surf:surf-api-bukkit-api", version.ref = "dev-slne-api-version" }
+dev-slne-surf-api-velocity-api = { module = "dev.slne.surf:surf-api-velocity-api", version.ref = "dev-slne-api-version" }
+#end

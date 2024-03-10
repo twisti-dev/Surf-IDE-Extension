@@ -1,0 +1,35 @@
+package ${PACKAGE};
+
+import ${BUKKIT_INSTANCE_PACKAGE}.${BUKKIT_INSTANCE_NAME};
+import ${API_PACKAGE}.${API_NAME};
+
+public final class ${CLASS_NAME} extends JavaPlugin {
+
+  private ${BUKKIT_INSTANCE_NAME} instance;
+
+  @Override
+  public void onLoad() {
+    this.instance = new ${BUKKIT_INSTANCE_NAME}();
+    new ${API_NAME}(this.instance);
+
+    this.instance.onLoad();
+  }
+
+  @Override
+  public void onEnable() {
+    this.instance.onEnable();
+  }
+
+  @Override
+  public void onDisable() {
+    this.instance.onDisable();
+  }
+
+  public ClassLoader getClassLoader0() {
+    return getClassLoader();
+  }
+
+  public static ${CLASS_NAME} getInstance() {
+    return getPlugin(${CLASS_NAME}.class);
+  }
+}

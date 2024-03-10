@@ -1,0 +1,13 @@
+plugins {
+    id("dev.slne.java-library-conventions")
+    id("dev.slne.java-shadow-conventions")
+}
+
+dependencies {
+    #if(${WITH_API})
+    compileOnlyApi(libs.dev.slne.surf.api.core.api)
+    #end
+    #if (${WITH_DATA})
+    compileOnlyApi(libs.dev.slne.data.api)
+    #end
+}

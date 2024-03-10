@@ -1,0 +1,88 @@
+package ${PACKAGE};
+
+import ${VELOCITY_INSTANCE_PACKAGE}.${VELOCITY_INSTANCE_NAME};
+import ${API_PACKAGE}.${API_NAME};
+import com.google.inject.Inject;
+import com.velocitypowered.api.event.Subscribe;
+import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
+import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
+import com.velocitypowered.api.plugin.Plugin;
+import com.velocitypowered.api.plugin.annotation.DataDirectory;
+import com.velocitypowered.api.proxy.ProxyServer;
+import com.velocitypowered.api.plugin.PluginContainer;
+import org.slf4j.Logger;
+
+import java.nio.file.Path;
+import java.util.concurrent.ExecutorService;
+
+@Plugin(
+    id = "${VELOCITY_MODULE_NAME}",
+    version = "1.0.0-SNAPSHOT",
+    description = "Change me"
+)
+public final class ${CLASS_NAME} {
+
+  private static ${CLASS_NAME} mainInstance;
+
+  private final ProxyServer server;
+  private final Logger logger;
+  private final PluginContainer pluginContainer;
+  private final Path dataDirectory;
+  private final ExecutorService executorService;
+  private final ${VELOCITY_INSTANCE_NAME} instance;
+
+  @Inject
+  public ${CLASS_NAME}(ProxyServer server, Logger logger, PluginContainer pluginContainer,
+    @DataDirectory Path dataDirectory, ExecutorService executorService) {
+    ${CLASS_NAME}.mainInstance = this;
+
+    this.server = server;
+    this.logger = logger;
+    this.pluginContainer = pluginContainer;
+    this.dataDirectory = dataDirectory;
+    this.executorService = executorService;
+
+    this.instance = new ${VELOCITY_INSTANCE_NAME}();
+    new ${API_NAME}(this.instance);
+
+    this.instance.onLoad();
+  }
+
+  @Subscribe
+  public void onProxyInitialization(ProxyInitializeEvent event) {
+    this.instance.onEnable();
+  }
+
+  @Subscribe
+  public void onProxyShutdown(ProxyShutdownEvent event) {
+    this.instance.onDisable();
+  }
+
+  public ProxyServer getServer() {
+      return server;
+  }
+
+  public Logger getLogger() {
+      return logger;
+  }
+
+  public PluginContainer getPluginContainer() {
+      return pluginContainer;
+  }
+
+  public Path getDataDirectory() {
+      return dataDirectory;
+  }
+
+  public ExecutorService getExecutorService() {
+      return executorService;
+  }
+
+  public ClassLoader getClassLoader() {
+    return getClass().getClassLoader();
+  }
+
+  public static ${CLASS_NAME} getInstance() {
+    return ${CLASS_NAME}.mainInstance;
+  }
+}

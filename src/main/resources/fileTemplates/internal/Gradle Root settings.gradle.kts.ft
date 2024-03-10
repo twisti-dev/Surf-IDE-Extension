@@ -1,0 +1,10 @@
+pluginManagement {
+    // Include 'plugins build' to define convention plugins.
+    includeBuild("build-logic")
+}
+
+rootProject.name = "${GRADLE_BASE_MODULE_NAME}"
+${GRADLE_INCLUDE_API}
+${GRADLE_INCLUDE_CORE}
+${GRADLE_INCLUDE_BUKKIT}
+${GRADLE_INCLUDE_VELOCITY}

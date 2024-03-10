@@ -1,0 +1,10 @@
+package ${PACKAGE};
+
+public final class ${CLASS_NAME} {
+
+  public static final String BASE_URL = "https://dapi.slne.dev/api/"; // TODO: Change me
+
+  private ${CLASS_NAME}() {
+    throw new UnsupportedOperationException("This class is not instantiable");
+  }
+}

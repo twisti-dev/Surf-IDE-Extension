@@ -1,0 +1,90 @@
+import net.minecrell.pluginyml.paper.PaperPluginDescription.DependencyDefinition
+import net.minecrell.pluginyml.paper.PaperPluginDescription.RelativeLoadOrder
+
+
+plugins {
+    id("dev.slne.java-library-conventions")
+    id("dev.slne.java-shadow-conventions")
+    id("net.minecrell.plugin-yml.paper") version "0.6.0"
+    id("xyz.jpenilla.run-paper") version "2.2.3"
+}
+
+dependencies {
+    api(project(":${GRADLE_CORE_MODULE_NAME}"))
+    #if (${WITH_API})
+    compileOnlyApi(libs.dev.slne.surf.api.velocity.api)
+    #end
+    compileOnlyApi(libs.io.papermc.paper.api)
+}
+
+tasks {
+    runServer {
+        minecraftVersion("1.20.4")
+
+        downloadPlugins {
+            modrinth("commandapi", "9.3.0")
+        }
+    }
+}
+
+paper {
+    name = "${GRADLE_BUKKIT_MODULE_NAME}"
+    #if (${PLUGIN_DESCRIPTION}).isNotEmpty())
+    description = "${PROJECT_DESCRIPTION}"
+    #end
+    #if (${PLUGIN_WEBSITE}).isNotEmpty())
+    website = "${PLUGIN_WEBSITE}"
+    #end
+    #if (${PLUGIN_AUTHORS}).isNotEmpty())
+    authors = ${PLUGIN_AUTHORS}
+    #end
+
+    main = "${GRADLE_BUKKIT_MAIN_CLASS}"
+    bootstrapper = "${GRADLE_BUKKIT_BOOTSTRAPPER_CLASS}"
+    loader = "${GRADLE_BUKKIT_LOADER_CLASS}"
+    generateLibrariesJson = true
+    apiVersion = "1.20"
+
+    serverDependencies {
+        #if (${WITH_API})
+        registerDepend("SurfBukkitAPI")
+        #end
+        #if (${WITH_DATA})
+        registerDepend("surf-data-bukkit")
+        #end
+    }
+}
+
+/**
+ * Registers a soft dependency.
+ *
+ * @param name The name of the dependency.
+ * @param joinClassPath Whether the dependency should be joined to the classpath.
+ * @param loadOrder The load order of the dependency.
+ */
+fun NamedDomainObjectContainerScope<DependencyDefinition>.registerSoft(
+    name: String,
+    joinClassPath: Boolean = true,
+    loadOrder: RelativeLoadOrder = RelativeLoadOrder.BEFORE
+) = register(name) {
+    this.required = false
+    this.joinClasspath = joinClassPath
+    this.load = loadOrder
+}
+
+/**
+ * Registers a required dependency.
+ *
+ * @param name The name of the dependency.
+ * @param joinClassPath Whether the dependency should be joined to the classpath.
+ * @param loadOrder The load order of the dependency.
+ */
+fun NamedDomainObjectContainerScope<DependencyDefinition>.registerDepend(
+    name: String,
+    joinClassPath: Boolean = true,
+    loadOrder: RelativeLoadOrder = RelativeLoadOrder.BEFORE
+) = register(name) {
+    this.required = true
+    this.joinClasspath = joinClassPath
+    this.load = loadOrder
+}

@@ -1,0 +1,13 @@
+package ${PACKAGE};
+
+import dev.slne.data.api.DataApi;
+import dev.slne.data.api.spring.SurfSpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SurfSpringApplication(scanBasePackages = "${SPRING_BASE_PACKAGE}", scanFeignBasePackages = "${SPRING_BASE_PACKAGE}.feign")
+public class ${CORE_SPRING_APPLICATION_NAME} {
+
+  public static ConfigurableApplicationContext run(ClassLoader classLoader) {
+    return DataApi.run(${CORE_SPRING_APPLICATION_NAME}.class, classLoader);
+  }
+}

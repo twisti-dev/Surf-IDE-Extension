@@ -1,0 +1,8 @@
+package ${PACKAGE};
+
+import org.jetbrains.annotations.ApiStatus.NonExtendable;
+
+@NonExtendable
+public interface ${API_INSTANCE_NAME} {
+
+}

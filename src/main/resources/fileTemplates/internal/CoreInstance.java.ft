@@ -1,0 +1,22 @@
+package ${PACKAGE};
+
+import ${API_PACKAGE}.instance.${API_INSTANCE_NAME};
+
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
+public abstract class ${CORE_INSTANCE_NAME} implements ${API_INSTANCE_NAME} {
+    public ${CORE_INSTANCE_NAME}() {
+    }
+
+    @OverridingMethodsMustInvokeSuper
+    public void onLoad() {
+    }
+
+    @OverridingMethodsMustInvokeSuper
+    public void onEnable() {
+    }
+
+    @OverridingMethodsMustInvokeSuper
+    public void onDisable() {
+    }
+}

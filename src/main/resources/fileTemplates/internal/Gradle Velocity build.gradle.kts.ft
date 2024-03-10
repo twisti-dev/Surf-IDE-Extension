@@ -1,0 +1,14 @@
+plugins {
+    id("dev.slne.java-library-conventions")
+    id("dev.slne.java-shadow-conventions")
+}
+
+dependencies {
+    api(project(":${GRADLE_CORE_MODULE_NAME}"))
+    #if (${WITH_API})
+    compileOnlyApi(libs.dev.slne.surf.api.velocity.api)
+    #end
+    compileOnlyApi(libs.com.velocitypowered.velocity.api)
+
+    annotationProcessor(libs.com.velocitypowered.velocity.api)
+}

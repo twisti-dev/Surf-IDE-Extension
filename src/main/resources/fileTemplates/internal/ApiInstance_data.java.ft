@@ -1,0 +1,10 @@
+package ${PACKAGE};
+
+import org.jetbrains.annotations.ApiStatus.NonExtendable;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@NonExtendable
+public interface ${API_INSTANCE_NAME} {
+
+  ConfigurableApplicationContext getApplicationContext();
+}

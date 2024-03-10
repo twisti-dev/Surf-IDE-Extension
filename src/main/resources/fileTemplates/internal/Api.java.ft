@@ -1,0 +1,20 @@
+package ${PACKAGE};
+
+import ${PACKAGE}.instance.${API_INSTANCE_NAME};
+
+import static com.google.common.base.Preconditions.*;
+
+public final class ${CLASS_NAME} {
+
+  private static ${API_INSTANCE_NAME} instance;
+
+  public ${CLASS_NAME}(${API_INSTANCE_NAME} instance) {
+    checkState(${CLASS_NAME}.instance == null, "Instance already exists");
+
+    ${CLASS_NAME}.instance = instance;
+  }
+
+  public static ${API_INSTANCE_NAME} getInstance() {
+    return instance;
+  }
+}
