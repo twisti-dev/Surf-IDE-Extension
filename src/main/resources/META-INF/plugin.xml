@@ -31,14 +31,22 @@
     <moduleBuilder id="ModuleBuilder"
       builderClass="dev.slne.surf.ide.surfideplugin.SurfModuleBuilder"/>
 
-    <!--  Entry Points-->
+    <!--Entry Points-->
     <deadCode implementation="dev.slne.surf.ide.surfideplugin.addons.data.SuppressUnusedWarning"/>
 
+
+    <!--Data Inspections-->
     <localInspection language="JAVA"
       enabledByDefault="true"
       level="ERROR"
-      implementationClass="dev.slne.surf.ide.surfideplugin.addons.data.inspection.DataListenerInspection"
+      implementationClass="dev.slne.surf.ide.surfideplugin.addons.data.inspection.DataListenerMethodInspection"
       displayName="DataListenerInspection"
+      groupName="DATA"/>
+    <localInspection language="JAVA"
+      enabledByDefault="true"
+      level="WARNING"
+      implementationClass="dev.slne.surf.ide.surfideplugin.addons.data.inspection.DataListenerClassAnnotatedInspection"
+      displayName="DataListenerClassAnnotatedInspection"
       groupName="DATA"/>
   </extensions>
 
