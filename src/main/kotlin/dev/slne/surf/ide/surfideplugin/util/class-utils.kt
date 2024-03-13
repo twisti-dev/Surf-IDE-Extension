@@ -11,3 +11,5 @@ fun PsiClass.addAnnotation(annotation: String) {
     JavaPsiFacade.getInstance(project).findClass(annotation, resolveScope) ?: return
     modifierList?.addAnnotation(annotation)
 }
+
+fun PsiClass.getDefaultListenerName() = "on" + name?.replace("Event", "")

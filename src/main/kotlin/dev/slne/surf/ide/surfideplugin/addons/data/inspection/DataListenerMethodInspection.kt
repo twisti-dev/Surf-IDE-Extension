@@ -2,6 +2,8 @@ package dev.slne.surf.ide.surfideplugin.addons.data.inspection
 
 import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.ProblemDescriptor
+import com.intellij.openapi.fileChooser.FileChooser
+import com.intellij.openapi.fileChooser.FileChooserDescriptor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiClass
@@ -25,11 +27,12 @@ class DataListenerMethodInspection : BaseInspection() {
     override fun buildVisitor(): BaseInspectionVisitor {
         return object : BaseInspectionVisitor() {
             override fun visitMethod(method: PsiMethod) {
-                if (method.parameterList.parameters.size != 1) {
+                val parameters = method.parameterList.parameters
+                if (parameters.isEmpty() || parameters.size != 1) {
                     registerMethodError(method)
                 }
 
-                val parameter = method.parameterList.parameters[0]
+                val parameter = parameters[0]
                 if (!parameter.isExtendingRedisEvent()) {
                     registerError(parameter)
                 }

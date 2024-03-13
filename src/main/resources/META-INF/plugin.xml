@@ -5,7 +5,7 @@
 
   <!-- Public plugin name should be written in Title Case.
        Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-  <name>Surf-ide-plugin</name>
+  <name>Surf-Ide-Extension</name>
 
   <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
   <vendor>twisti</vendor>
@@ -48,7 +48,19 @@
       implementationClass="dev.slne.surf.ide.surfideplugin.addons.data.inspection.DataListenerClassAnnotatedInspection"
       displayName="DataListenerClassAnnotatedInspection"
       groupName="DATA"/>
+
+
   </extensions>
+
+  <actions>
+    <!--Data generation-->
+    <action
+      class="dev.slne.surf.ide.surfideplugin.addons.data.generation.redisevent.GenerateRedisEventListenerAction"
+      id="GenerateRedisEventListenerAction">
+      <add-to-group group-id="GenerateGroup" anchor="after"
+        relative-to-action="JavaGenerateGroup1"/>
+    </action>
+  </actions>
 
 
 </idea-plugin>
