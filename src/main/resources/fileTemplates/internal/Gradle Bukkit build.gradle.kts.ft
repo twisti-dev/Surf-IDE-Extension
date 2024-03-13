@@ -12,7 +12,7 @@ plugins {
 dependencies {
     api(project(":${GRADLE_CORE_MODULE_NAME}"))
     #if (${WITH_API})
-    compileOnlyApi(libs.dev.slne.surf.api.velocity.api)
+    compileOnlyApi(libs.dev.slne.surf.api.bukkit.api)
     #end
     compileOnlyApi(libs.io.papermc.paper.api)
 }

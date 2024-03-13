@@ -8,6 +8,7 @@
   <name>Surf-ide-plugin</name>
 
   <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+  <vendor>twisti</vendor>
 
   <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
        Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
@@ -27,7 +28,18 @@
   <depends>ByteCodeViewer</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <moduleBuilder id="ModuleBuilder" builderClass="dev.slne.surf.ide.surfideplugin.SurfModuleBuilder"/>
+    <moduleBuilder id="ModuleBuilder"
+      builderClass="dev.slne.surf.ide.surfideplugin.SurfModuleBuilder"/>
+
+    <!--  Entry Points-->
+    <deadCode implementation="dev.slne.surf.ide.surfideplugin.addons.data.SuppressUnusedWarning"/>
+
+    <localInspection language="JAVA"
+      enabledByDefault="true"
+      level="ERROR"
+      implementationClass="dev.slne.surf.ide.surfideplugin.addons.data.inspection.DataListenerInspection"
+      displayName="DataListenerInspection"
+      groupName="DATA"/>
   </extensions>
 
 

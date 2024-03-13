@@ -2,6 +2,7 @@ package ${PACKAGE};
 
 import ${BUKKIT_INSTANCE_PACKAGE}.${BUKKIT_INSTANCE_NAME};
 import ${API_PACKAGE}.${API_NAME};
+import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ${CLASS_NAME} extends JavaPlugin {
 
