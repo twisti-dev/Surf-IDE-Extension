@@ -73,7 +73,7 @@ class ProjectSetupFinalizerWizardStep(parent: NewProjectWizardStep) : AbstractNe
  */
 interface ProjectSetupFinalizer : NewProjectWizardStep {
     companion object {
-        val EP_NAME = ExtensionPointName<Factory>("dev.slne.surf.ide.surf-ide-plugin.projectSetupFinalizer")
+        val EP_NAME = ExtensionPointName<Factory>("dev.slne.surf.ide.surf-ide-extension.projectSetupFinalizer")
     }
 
     /**

@@ -12,7 +12,7 @@ import com.intellij.util.xmlb.annotations.Attribute
 interface BuildSystemSupport {
     companion object {
         private val EP_NAME = ExtensionPointName<KeyedLazyInstance<BuildSystemSupport>>(
-            "dev.slne.surf.ide.surf-ide-plugin.buildSystemSupport",
+            "dev.slne.surf.ide.surf-ide-extension.buildSystemSupport",
         )
         private val COLLECTOR = KeyedExtensionCollector<BuildSystemSupport, Pair<String, String>>(EP_NAME)
 

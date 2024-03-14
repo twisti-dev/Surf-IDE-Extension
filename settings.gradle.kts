@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "surf-ide-plugin"
+rootProject.name = "Surf-IDE-Extension"
