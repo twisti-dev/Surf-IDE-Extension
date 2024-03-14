@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "dev.slne.surf.ide"
-version = "1.0-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -53,6 +53,7 @@ tasks {
 
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
+        channels = listOf("slne")
     }
 }
 

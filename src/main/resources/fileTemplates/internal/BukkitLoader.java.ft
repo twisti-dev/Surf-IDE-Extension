@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME};
+package ${PACKAGE};
 
 import com.google.gson.Gson;
 import dev.slne.surf.surfapi.core.api.messages.Colors;
