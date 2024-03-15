@@ -2,3 +2,4 @@ Entweder man baut sich das Plugin selber oder man lädt es aus `/build/libs` her
 
 ## Installation
 
+test
