@@ -6,10 +6,7 @@ import com.intellij.openapi.wm.ex.IdeFocusTraversalPolicy
 import com.intellij.ui.JBColor
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.util.ui.UIUtil
-import javax.swing.JLabel
-import javax.swing.JPanel
-import javax.swing.JSeparator
-import javax.swing.JTextField
+import javax.swing.*
 
 class RedisEventListenerWizard(panel: JPanel?, className: String, defaultListenerName: String) {
     lateinit var panel: JPanel
@@ -18,6 +15,8 @@ class RedisEventListenerWizard(panel: JPanel?, className: String, defaultListene
     private lateinit var publicVoidLabel: JLabel
     private lateinit var contentPanel: JPanel
     private lateinit var separator: JSeparator
+    private lateinit var choosenChannels: JFormattedTextField
+    private lateinit var channelsLabel: JLabel
 
     init {
         classNameTextField.font = EditorUtil.getEditorFont()
@@ -25,10 +24,16 @@ class RedisEventListenerWizard(panel: JPanel?, className: String, defaultListene
         publicVoidLabel.font = EditorUtil.getEditorFont()
 
         if (!JBColor.isBright()) {
-            publicVoidLabel.foreground = JavaHighlightingColors.KEYWORD.defaultAttributes.foregroundColor
+            val foregroundColor = JavaHighlightingColors.KEYWORD.defaultAttributes.foregroundColor
+
+            publicVoidLabel.foreground = foregroundColor
+//            channelsLabel.foreground = foregroundColor
         } else {
-            publicVoidLabel.foreground =
+            val foregroundColor =
                 JavaHighlightingColors.KEYWORD.fallbackAttributeKey!!.defaultAttributes.foregroundColor
+
+            publicVoidLabel.foreground = foregroundColor
+//            channelsLabel.foreground = foregroundColor
         }
 
         if (panel != null) {
@@ -41,10 +46,16 @@ class RedisEventListenerWizard(panel: JPanel?, className: String, defaultListene
 
         IdeFocusTraversalPolicy.getPreferredFocusedComponent(listenerNameTextField).requestFocus()
         listenerNameTextField.requestFocus()
+
+        choosenChannels.font = EditorUtil.getEditorFont()
+        choosenChannels.toolTipText = "Comma separated list of channels"
     }
 
     val chosenClassName: String
         get() = listenerNameTextField.text
+
+    val chosenChannels: String
+        get() = choosenChannels.text
 
     companion object {
         private val innerContentPanelConstraints = GridConstraints()

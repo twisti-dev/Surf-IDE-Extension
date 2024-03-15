@@ -62,7 +62,8 @@ class GenerateRedisEventListenerHandler :
             return null
         }
 
-        val chosenName = generationDialog.chosenName
+        val chosenName = generationDialog.chosenListenerName
+        val chosenChannels = generationDialog.chosenChannels.split(", ")
         val position = editor.caretModel.logicalPosition
 
         val method = PsiTreeUtil.getParentOfType(
@@ -77,7 +78,7 @@ class GenerateRedisEventListenerHandler :
             editor.caretModel,
             chosenClass,
             chosenName,
-            arrayOf("test")
+            chosenChannels
         )
 
         return DUMMY_RESULT
@@ -124,7 +125,7 @@ class GenerateRedisEventListenerHandler :
         project: Project,
         chosenClass: PsiClass,
         chosenName: String,
-        chosenChannels: Array<String>,
+        chosenChannels: List<String>,
     ): PsiMethod? {
         val method = generateRedisStyleEventListenerMethod(
             chosenClass,
@@ -154,7 +155,7 @@ class GenerateRedisEventListenerHandler :
             chosenName: String,
             project: Project,
             annotationName: String,
-            channels: Array<String>,
+            channels: List<String>,
         ): PsiMethod? {
             val newMethod =
                 createVoidMethodWithParameterType(project, chosenName, chosenClass) ?: return null
@@ -211,31 +212,5 @@ private data class GenerateData(
     var model: CaretModel,
     var chosenClass: PsiClass,
     var chosenName: String,
-    var chosenChannels: Array<String>,
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is GenerateData) return false
-
-        if (editor != other.editor) return false
-        if (position != other.position) return false
-        if (method != other.method) return false
-        if (model != other.model) return false
-        if (chosenClass != other.chosenClass) return false
-        if (chosenName != other.chosenName) return false
-        if (!chosenChannels.contentEquals(other.chosenChannels)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = editor.hashCode()
-        result = 31 * result + position.hashCode()
-        result = 31 * result + (method?.hashCode() ?: 0)
-        result = 31 * result + model.hashCode()
-        result = 31 * result + chosenClass.hashCode()
-        result = 31 * result + chosenName.hashCode()
-        result = 31 * result + chosenChannels.contentHashCode()
-        return result
-    }
-}
+    var chosenChannels: List<String>,
+)

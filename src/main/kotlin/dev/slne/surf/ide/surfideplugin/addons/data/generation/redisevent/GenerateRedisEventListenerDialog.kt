@@ -2,7 +2,7 @@ package dev.slne.surf.ide.surfideplugin.addons.data.generation.redisevent
 
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.ui.DialogWrapper
-import dev.slne.surf.ide.surfideplugin.addons.data.generation.redisevent.wizard.RedisEventListenerWizard
+import dev.slne.surf.ide.surfideplugin.addons.data.generation.redisevent.wizard.RedisEventListenerWizardModern
 
 class GenerateRedisEventListenerDialog(
     editor: Editor,
@@ -11,11 +11,11 @@ class GenerateRedisEventListenerDialog(
 ) :
     DialogWrapper(editor.project, editor.component, false, IdeModalityType.IDE) {
 
-    private val wizard: RedisEventListenerWizard =
-        RedisEventListenerWizard(null, className, defaultListenerName)
+    private val wizard: RedisEventListenerWizardModern =
+        RedisEventListenerWizardModern(className, defaultListenerName)
 
     init {
-        title = "Generate Redis Event Listener"
+        title = "Redis Event Listener Settings"
         isOKActionEnabled = true
         setValidationDelay(0)
 
@@ -23,9 +23,9 @@ class GenerateRedisEventListenerDialog(
     }
 
 
-    override fun createCenterPanel() = wizard.panel
+    override fun createCenterPanel() = wizard.build()
 
-    val chosenName: String
-        get() = wizard.chosenClassName
+    val chosenListenerName by wizard.chosenListenerName
+    val chosenChannels by wizard.chosenChannels
 }
 
