@@ -25,7 +25,7 @@
     </p>
   ]]></description>
   <change-notes><![CDATA[
-    <p>Initial release of the Surf IDE Extension</p>
+    <p>Rewrote the redisevent generation</p>
   ]]></change-notes>
 
   <!-- Product and plugin compatibility requirements.

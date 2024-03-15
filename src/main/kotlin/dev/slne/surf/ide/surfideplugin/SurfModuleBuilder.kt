@@ -16,7 +16,7 @@ import dev.slne.surf.ide.surfideplugin.creator.buildsystem.BuildSystemProperties
 import dev.slne.surf.ide.surfideplugin.creator.depend.SurfDependStep
 import dev.slne.surf.ide.surfideplugin.creator.modules.SelectModulesStep
 import dev.slne.surf.ide.surfideplugin.generator.TreeGenerator
-import dev.slne.surf.ide.surfideplugin.old.creator.backgroundTask
+import dev.slne.surf.ide.surfideplugin.util.backgroundTask
 import java.io.File
 
 const val ID = "TestModuleBuilder"
