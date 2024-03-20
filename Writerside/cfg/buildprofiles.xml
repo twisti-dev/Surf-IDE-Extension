@@ -1,0 +1,14 @@
+<buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
+  <variables>
+    <primary-color>forest</primary-color>
+    <custom-favicons>pluginIcon.svg</custom-favicons>
+    <header-logo>pluginIcon.svg</header-logo>
+    <product-web-url>https://plugins.jetbrains.com/plugin/23958-surf-ide-extension</product-web-url>
+    <download-title>Get Plugin</download-title>
+    <download-page>https://plugins.jetbrains.com/plugin/23958-surf-ide-extension</download-page>
+    <showDownloadButton>true</showDownloadButton>
+    <noindex-content>false</noindex-content>
+    <color-preset>vivid</color-preset>
+  </variables>
+</buildprofiles>
