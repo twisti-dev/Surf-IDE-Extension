@@ -27,6 +27,8 @@ class DataListenerMethodInspection : BaseInspection() {
     override fun buildVisitor(): BaseInspectionVisitor {
         return object : BaseInspectionVisitor() {
             override fun visitMethod(method: PsiMethod) {
+                method.getAnnotation(DataConstants.DATA_LISTENER_ANNOTATION) ?: return
+
                 val parameters = method.parameterList.parameters
                 if (parameters.isEmpty() || parameters.size != 1) {
                     registerMethodError(method)

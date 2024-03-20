@@ -6,6 +6,7 @@ import dev.slne.surf.ide.surfideplugin.generator.api.buildApi
 import dev.slne.surf.ide.surfideplugin.generator.bukkit.buildBukkit
 import dev.slne.surf.ide.surfideplugin.generator.core.buildCore
 import dev.slne.surf.ide.surfideplugin.generator.gradle.buildBaseGradle
+import dev.slne.surf.ide.surfideplugin.generator.misc.buildMisc
 import dev.slne.surf.ide.surfideplugin.generator.velocity.buildVelocity
 import dev.slne.surf.ide.surfideplugin.util.TemplateAttributes
 import dev.slne.surf.ide.surfideplugin.util.build
@@ -96,176 +97,13 @@ class TreeGenerator(private val withData: Boolean, val withSurfApi: Boolean) {
                     velocityModuleName
                 )
 
-
-//                dir("src") {
-//
-//                    dir("jvmMain") {
-//                        dir("kotlin") {
-//                            packages(packageSegments) {
-//                                jvmFiles.forEach { fileName ->
-//                                    file(
-//                                        fileName,
-//                                        "${templateName}_jvm_source_$fileName",
-//                                        attrs
-//                                    )
-//                                }
-//                            }
-//                        }
-//                        dir("resources") {
-//                            jvmResourcesFiles.forEach { fileName ->
-//                                file(
-//                                    fileName,
-//                                    "${templateName}_jvm_resources_$fileName",
-//                                    attrs
-//                                )
-//                            }
-//                            if (jvmResourcesAssetsFiles.isNotEmpty()) {
-//                                dir("assets") {
-//                                    jvmResourcesAssetsFiles.forEach { fileName ->
-//                                        file(
-//                                            fileName,
-//                                            "${templateName}_jvm_resources_assets_$fileName",
-//                                            attrs
-//                                        )
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                    dir("commonMain") {
-//                        dir("kotlin") {
-//                            packages(packageSegments) {
-//                                commonFiles.forEach { fileName ->
-//                                    file(
-//                                        fileName,
-//                                        "common_$fileName",
-//                                        attrs
-//                                    )
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//                    dir("jsMain") {
-//                        dir("kotlin") {
-//                            packages(packageSegments) {
-//                                if (isFrontendOnly) {
-//                                    jsSourceFrontendFiles.forEach { fileName ->
-//                                        file(
-//                                            fileName,
-//                                            "js_source_frontend_$fileName",
-//                                            attrs
-//                                        )
-//                                    }
-//                                } else {
-//                                    jsSourceFullstackFiles.forEach { fileName ->
-//                                        file(
-//                                            fileName,
-//                                            "js_source_fullstack_$fileName",
-//                                            attrs
-//                                        )
-//                                    }
-//                                }
-//                            }
-//                        }
-//                        dir("web") {
-//                            jsWebFiles.forEach { fileName ->
-//                                file(
-//                                    fileName,
-//                                    "js_web_$fileName",
-//                                    attrs
-//                                )
-//                            }
-//
-//                        }
-//                        if (modules.contains("kvision-i18n")) {
-//                            dir("resources") {
-//                                dir("i18n") {
-//                                    jsResourcesFiles.forEach { fileName ->
-//                                        file(
-//                                            fileName,
-//                                            "js_resources_$fileName",
-//                                            attrs
-//                                        )
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                    dir("jsTest") {
-//                        dir("kotlin") {
-//                            dir("test") {
-//                                packages(packageSegments) {
-//                                    jsTestFiles.forEach { fileName ->
-//                                        file(
-//                                            fileName,
-//                                            "js_test_$fileName",
-//                                            attrs
-//                                        )
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                dir("gradle") {
-//                    dir("wrapper") {
-//                        gradleWrapperFiles.forEach { fileName ->
-//                            file(
-//                                fileName,
-//                                "wrapper_$fileName",
-//                                attrs,
-//                                binary = true
-//                            )
-//                        }
-//                    }
-//                }
-//                dir(".idea") {
-//                    ideaFiles.forEach { fileName -> file(fileName, "idea_${fileName}", attrs) }
-//                }
-//                dir("webpack.config.d") {
-//                    webpackFiles.forEach { fileName ->
-//                        file(
-//                            fileName,
-//                            "webpack_${fileName}",
-//                            attrs
-//                        )
-//                    }
-//                }
-//                gradleFile.forEach { fileName ->
-//                    file(
-//                        fileName,
-//                        "${templateName}_${fileName}",
-//                        attrs
-//                    )
-//                }
-//                rootFiles.forEach { fileName ->
-//                    file(
-//                        fileName,
-//                        fileName,
-//                        attrs,
-//                        binary = (fileName == "gradlew" || fileName == "gradlew.bat"),
-//                        executable = (fileName == "gradlew")
-//                    )
-//                }
+                buildMisc()
             }
             root.refresh(false, true)
         } catch (ex: Exception) {
             ex.printStackTrace()
             println(ex)
         }
-    }
-
-    private fun generateAttributes(
-        currentPackageName: String,
-        currentClassName: String,
-        apiInstanceName: String,
-    ): Map<String, Any> {
-        return mapOf(
-            TemplateAttributes.PACKAGE to currentPackageName,
-            TemplateAttributes.CURRENT_CLASS_NAME to currentClassName,
-            TemplateAttributes.API_INSTANCE_NAME to apiInstanceName
-        )
     }
 }
 

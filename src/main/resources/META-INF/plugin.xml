@@ -26,8 +26,9 @@
   ]]></description>
   <change-notes><![CDATA[
     <ul>
-      <li>Replaced internal API with public API</li>
-      <li></li>
+      <li>Fixed redis event listener inspection</li>
+      <li>Generate <code>.space.kts</code></li>
+      <li>Generate code styles</li>
     </ul>
   ]]></change-notes>
 

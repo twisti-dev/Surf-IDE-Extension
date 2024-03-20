@@ -21,11 +21,16 @@ val GRADLE_BUILD_LOGIC_BUILD_TEMPLATE = gradleTemplate("Gradle Build Logic ", "b
 val GRADLE_BUILD_LOGIC_COMMON_CONVENTIONS_TEMPLATE = gradleTemplate("Gradle Build Logic ", "dev.slne.java-common-conventions")
 val GRADLE_BUILD_LOGIC_LIBRARY_CONVENTIONS_TEMPLATE = gradleTemplate("Gradle Build Logic ", "dev.slne.java-library-conventions")
 val GRADLE_BUILD_LOGIC_SHADOW_CONVENTIONS_TEMPLATE = gradleTemplate("Gradle Build Logic ", "dev.slne.java-shadow-conventions")
-val GRADLE_LIBS_TEMPLATE = gradleTemplate("Gradle ", "libs", "versions.toml")
+val GRADLE_LIBS_TEMPLATE = prefixedTemplate("Gradle ", "libs", "versions.toml")
 val GRADLE_API_BUILD_TEMPLATE = gradleTemplate("Gradle Api ", "build")
 val GRADLE_CORE_BUILD_TEMPLATE = gradleTemplate("Gradle Core ", "build")
 val GRADLE_BUKKIT_BUILD_TEMPLATE = gradleTemplate("Gradle Bukkit ", "build")
 val GRADLE_VELOCITY_BUILD_TEMPLATE = gradleTemplate("Gradle Velocity ", "build")
+
+val MISC_SPACE_TEMPLATE = FileName({ ".space"}, fileEnding = "kts")
+val MISC_CODE_STYLES_CONFIG_TEMPLATE = prefixedTemplate("CodeStyle ", "codeStyleConfig", "xml")
+val MISC_CODE_STYLES_PROJECT_TEMPLATE = prefixedTemplate("CodeStyle ", "Project", "xml")
+val MISC_INSPECTION_PROFILES_TEMPLATE = prefixedTemplate("Inspection ", "Project_Default", "xml")
 // @formatter:on
 
 data class FileName(
@@ -39,8 +44,14 @@ data class FileName(
         fileName + (if (withData) "_data" else "") + ".$fileEnding"
 }
 
-private fun gradleTemplate(prefix: String, fileName: String, fileEnding: String = "gradle.kts") = FileName(
+private fun gradleTemplate(prefix: String, fileName: String) = prefixedTemplate(
+    prefix,
+    fileName,
+    "gradle.kts"
+)
+
+private fun prefixedTemplate(prefix: String, fileName: String, fileEnding: String) = FileName(
     displayFileName = { fileName },
-    fileName = prefix + fileName,
+    fileName = prefix + fileName ,
     fileEnding = fileEnding
 )

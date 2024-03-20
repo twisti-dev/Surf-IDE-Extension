@@ -33,7 +33,7 @@ fun VirtualFile.build(body: File.() -> Unit = {}) {
 fun File.file(
     fileName: FileName,
     filePrefix: String = "",
-    withData: Boolean,
+    withData: Boolean = false,
     attributes: Map<String, Any> = emptyMap(),
     binary: Boolean = false,
     executable: Boolean = false
