@@ -1,23 +1,11 @@
 package dev.slne.surf.ide.surfideplugin.generator.gradle
 
-import com.intellij.openapi.project.Project
-import com.intellij.openapi.project.displayUrlRelativeToProject
-import com.intellij.openapi.util.io.toCanonicalPath
 import dev.slne.surf.ide.surfideplugin.*
-import dev.slne.surf.ide.surfideplugin.generator.gradle.util.generateGradleWrapper
 import dev.slne.surf.ide.surfideplugin.util.*
-import org.gradle.util.GradleVersion
-import org.jetbrains.plugins.gradle.settings.GradleDefaultProjectSettings
-import org.jetbrains.plugins.gradle.settings.GradleSettings
-import org.jetbrains.plugins.gradle.util.setupGradleJvm
-import org.jetbrains.plugins.gradle.util.validateJavaHome
 import java.io.File
-import java.nio.file.Paths
 
 
 internal fun File.buildBaseGradle(
-    project: Project,
-    gradleVersion: String,
     basePackages: List<String>,
     dataDepend: Boolean,
     apiDepend: Boolean,
@@ -135,20 +123,6 @@ internal fun File.buildBaseGradle(
             )
         }
     }
-
-
-    val rootProjectPath = Paths.get(project.basePath!!)
-    val gradleProjectSettings = GradleDefaultProjectSettings.createProjectSettings("")
-    val gradleSettings = GradleSettings.getInstance(project)
-    val parsedGradleVersion = GradleVersion.version(gradleVersion)
-
-    gradleProjectSettings.externalProjectPath = rootProjectPath.toCanonicalPath()
-
-    setupGradleJvm(project, gradleProjectSettings, parsedGradleVersion)
-    validateJavaHome(project, rootProjectPath, parsedGradleVersion)
-
-    gradleSettings.linkProject(gradleProjectSettings)
-    generateGradleWrapper(toPath(), parsedGradleVersion)
 }
 
 internal fun generateBaseGradleAttributes(

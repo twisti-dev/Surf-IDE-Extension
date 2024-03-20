@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "dev.slne.surf.ide"
-version = "1.0.1-SNAPSHOT"
+version = "1.0.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -14,7 +14,7 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2023.3.4")
+    version.set("2023.3.5")
     type.set("IU") // Target IDE Platform
 
     plugins.addAll(
@@ -26,7 +26,8 @@ intellij {
         "ByteCodeViewer",
         "properties",
         // needed dependencies for unit tests
-        "junit"
+        "junit",
+        "org.jetbrains.plugins.gradle"
     )
 }
 
@@ -41,7 +42,7 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("231")
+        sinceBuild.set("232")
         untilBuild.set("241.*")
     }
 

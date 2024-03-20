@@ -1,6 +1,5 @@
 package dev.slne.surf.ide.surfideplugin.addons.data.generation.redisevent.wizard
 
-import com.intellij.codeInsight.completion.ml.JavaCompletionFeatures
 import com.intellij.ide.highlighter.JavaHighlightingColors
 import com.intellij.openapi.observable.properties.AtomicProperty
 import com.intellij.openapi.observable.properties.ObservableMutableProperty
@@ -10,12 +9,11 @@ import com.intellij.openapi.ui.validation.DialogValidation
 import com.intellij.openapi.ui.validation.WHEN_TEXT_CHANGED
 import com.intellij.openapi.ui.validation.validationErrorIf
 import com.intellij.ui.JBColor
-import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.dsl.builder.textValidation
-import org.jetbrains.kotlin.tools.projectWizard.settings.buildsystem.JetBrainsSpace
 import org.jetbrains.kotlin.utils.addToStdlib.ifTrue
+import java.util.*
 
 class RedisEventListenerWizardModern(private val className: String, defaultListenerName: String) {
 
@@ -24,15 +22,6 @@ class RedisEventListenerWizardModern(private val className: String, defaultListe
 
     fun build(): DialogPanel {
         return panel {
-//            row {
-//                //language=HTML
-//                text(
-//                    """
-//                    Redis Listener for: <code>$className</code>
-//                """.trimIndent()
-//                )
-//            }
-
             row {
                 @Suppress("DialogTitleCapitalization")
                 label("public void").applyToComponent {
@@ -64,7 +53,7 @@ fun <T> property(initialValue: T): ObservableMutableProperty<T> {
 
 val CHECK_METHOD_NAME: DialogValidation.WithParameter<() -> String> =
     validationErrorIf<String>("Invalid method name") {
-        it.isEmpty() || it.contains(" ") || JavaCompletionFeatures.JavaKeyword.values()
+        it.isEmpty() || it.contains(" ") || JavaKeyword.values()
             .map { it.toString() }.contains(it)
     }
 
@@ -76,3 +65,48 @@ val CHECK_CHANNELS_SPLITTED_CORRECTLY: DialogValidation.WithParameter<() -> Stri
                 || input.startsWith(", ")
                 || input.split(",").map { it.trim() }.any { it.isEmpty() }
     }
+
+enum class JavaKeyword {
+    ABSTRACT,
+    BOOLEAN,
+    BREAK,
+    CASE,
+    CATCH,
+    CHAR,
+    CLASS,
+    CONST,
+    CONTINUE,
+    DOUBLE,
+    ELSE,
+    EXTENDS,
+    FINAL,
+    FINALLY,
+    FLOAT,
+    FOR,
+    IF,
+    IMPLEMENTS,
+    IMPORT,
+    INSTANCEOF,
+    INT,
+    INTERFACE,
+    LONG,
+    NEW,
+    PRIVATE,
+    PROTECTED,
+    PUBLIC,
+    RETURN,
+    STATIC,
+    SUPER,
+    SWITCH,
+    THIS,
+    THROW,
+    THROWS,
+    TRY,
+    VOID,
+    WHILE,
+    TRUE,
+    FALSE,
+    NULL;
+
+    override fun toString() = name.lowercase(Locale.getDefault())
+}

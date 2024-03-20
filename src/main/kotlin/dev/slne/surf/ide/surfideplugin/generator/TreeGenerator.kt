@@ -1,6 +1,5 @@
 package dev.slne.surf.ide.surfideplugin.generator
 
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import dev.slne.surf.ide.surfideplugin.FileName
 import dev.slne.surf.ide.surfideplugin.generator.api.buildApi
@@ -11,8 +10,6 @@ import dev.slne.surf.ide.surfideplugin.generator.velocity.buildVelocity
 import dev.slne.surf.ide.surfideplugin.util.TemplateAttributes
 import dev.slne.surf.ide.surfideplugin.util.build
 import dev.slne.surf.ide.surfideplugin.util.dir
-import org.gradle.buildinit.plugins.internal.GitIgnoreGenerator
-import org.gradle.buildinit.plugins.internal.InitSettings
 
 /**
  * Base class for building KVision project.
@@ -30,7 +27,6 @@ import org.gradle.buildinit.plugins.internal.InitSettings
  */
 class TreeGenerator(private val withData: Boolean, val withSurfApi: Boolean) {
     fun generate(
-        project: Project,
         root: VirtualFile,
 //        artifactId: String,
 //        groupId: String,
@@ -46,8 +42,7 @@ class TreeGenerator(private val withData: Boolean, val withSurfApi: Boolean) {
         withBukkit: Boolean = true,
         withVelocity: Boolean = true,
         baseModuleName: String,
-        filePrefix: String,
-        gradleVersion: String
+        filePrefix: String
     ) {
         try {
 //            GitIgnoreGenerator().generate(InitSettings())
@@ -83,8 +78,6 @@ class TreeGenerator(private val withData: Boolean, val withSurfApi: Boolean) {
                 }
 
                 buildBaseGradle(
-                    project,
-                    gradleVersion,
                     basePackages,
                     withData,
                     withSurfApi,

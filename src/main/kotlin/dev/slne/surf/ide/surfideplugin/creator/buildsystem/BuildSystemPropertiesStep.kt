@@ -140,7 +140,6 @@ class BuildSystemPropertiesStep<ParentStep>(
                     }
                     .validationRequestor(WHEN_GRAPH_PROPAGATION_FINISHED(propertyGraph))
                     .enabledIf(autoSelectGradleVersionProperty.not())
-//                    .onApply { logGradleVersionFinished(gradleVersion) }
                 checkBox(GradleBundle.message("gradle.project.settings.distribution.wrapper.version.auto.select"))
                     .bindSelected(autoSelectGradleVersionProperty)
             }
@@ -210,19 +209,13 @@ class BuildSystemPropertiesStep<ParentStep>(
         if (gradleVersion.isGradleOlderThan(oldestCompatibleGradle)) {
             return validationWithDialog(
                 withDialog = withDialog,
-                message = GradleBundle.message(
-                    "gradle.project.settings.kotlin.dsl.unsupported",
-                    gradleVersion.version
-                ),
-                dialogTitle = GradleBundle.message(
-                    "gradle.project.settings.kotlin.dsl.unsupported.title",
-                    context.isCreatingNewProjectInt
-                ),
-                dialogMessage = GradleBundle.message(
-                    "gradle.project.settings.kotlin.dsl.unsupported.message",
-                    oldestCompatibleGradle,
-                    gradleVersion.version
-                )
+                message = "Kotlin DSL isn''t supported by Gradle ${gradleVersion.version}",
+                dialogTitle = "Unsupported Gradle DSL",
+                dialogMessage = """
+                    Kotlin DSL has been supported since Gradle $oldestCompatibleGradle.
+                    
+                    Do you want to proceed with Kotlin DSL and Gradle ${gradleVersion.version}?
+                """.trimIndent()
             )
         }
         return null

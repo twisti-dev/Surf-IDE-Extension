@@ -25,7 +25,10 @@
     </p>
   ]]></description>
   <change-notes><![CDATA[
-    <p>Rewrote the redisevent generation</p>
+    <ul>
+      <li>Replaced internal API with public API</li>
+      <li></li>
+    </ul>
   ]]></change-notes>
 
   <!-- Product and plugin compatibility requirements.
@@ -33,6 +36,7 @@
   <depends>com.intellij.modules.platform</depends>
   <depends>com.intellij.modules.java</depends>
   <depends>com.intellij.gradle</depends>
+  <depends>org.jetbrains.plugins.gradle</depends>
   <depends>org.jetbrains.kotlin</depends>
   <depends>com.intellij.properties</depends>
   <depends>ByteCodeViewer</depends>

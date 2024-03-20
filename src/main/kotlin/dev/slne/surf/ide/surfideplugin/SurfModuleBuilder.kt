@@ -1,7 +1,6 @@
 package dev.slne.surf.ide.surfideplugin
 
 import com.intellij.ide.projectWizard.ProjectSettingsStep
-import com.intellij.ide.util.projectWizard.ModuleBuilder
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
 import com.intellij.ide.wizard.*
@@ -17,11 +16,14 @@ import dev.slne.surf.ide.surfideplugin.creator.depend.SurfDependStep
 import dev.slne.surf.ide.surfideplugin.creator.modules.SelectModulesStep
 import dev.slne.surf.ide.surfideplugin.generator.TreeGenerator
 import dev.slne.surf.ide.surfideplugin.util.backgroundTask
+import org.gradle.util.GradleVersion
+import org.jetbrains.plugins.gradle.service.project.wizard.AbstractGradleModuleBuilder
+import org.jetbrains.plugins.gradle.settings.DistributionType
 import java.io.File
 
 const val ID = "TestModuleBuilder"
 
-class SurfModuleBuilder : ModuleBuilder() {
+class SurfModuleBuilder : AbstractGradleModuleBuilder() {
     lateinit var surfDataDepend: GraphProperty<Boolean>
     lateinit var surfDataVersion: GraphProperty<String>
 
@@ -40,7 +42,13 @@ class SurfModuleBuilder : ModuleBuilder() {
 
     lateinit var gradleVersion: GraphProperty<String>
 
-    override fun getModuleType() = SurfModuleType()
+    override fun getModuleType() = SurfModuleType
+    override fun getNodeIcon() = getModuleType().icon
+    override fun getBuilderId() = getModuleType().id
+    override fun getDescription() = getModuleType().description
+    override fun getPresentableName() = getModuleType().name
+    override fun getParentGroup() = "Surf"
+    override fun getWeight() = 0
 
     override fun setupRootModel(modifiableRootModel: ModifiableRootModel) {
         if (moduleJdk != null) {
@@ -56,7 +64,6 @@ class SurfModuleBuilder : ModuleBuilder() {
         modifiableRootModel.project.backgroundTask("Creating Plugin") {
             it.isIndeterminate = true
             generator.generate(
-                modifiableRootModel.project,
                 root,
                 groupId.get(),
                 artifactId.get(),
@@ -68,10 +75,16 @@ class SurfModuleBuilder : ModuleBuilder() {
                 withBukkit.get(),
                 withVelocity.get(),
                 baseModuleName.get(),
-                fileProjectName.get(),
-                gradleVersion.get()
+                fileProjectName.get()
             )
         }
+
+        isCreatingNewProject = true
+        setCreateEmptyContentRoots(false)
+        setGradleDistributionType(DistributionType.WRAPPED)
+        setGradleVersion(GradleVersion.version(gradleVersion.get()))
+        isUseKotlinDsl = true
+        super.setupRootModel(modifiableRootModel)
     }
 
     private fun createAndGetRoot(): VirtualFile? {
