@@ -1,3 +1,1 @@
-Entweder man baut sich das Plugin selber oder man lädt es aus `/build/libs` herunter.
-
-## Installation
+https://plugins.jetbrains.com/plugin/23958-surf-ide-extension/
